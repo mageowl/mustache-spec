@@ -18,7 +18,8 @@
           "lisp": "(lambda () \"world\")",
           "pwsh": "\"world\"",
           "go": "func() string { return \"world\" }",
-          "erlang": "fun() -> \"world\" end."
+          "erlang": "fun() -> \"world\" end.",
+          "matlab": "@() \"world\""
         }
       },
       "template": "Hello, {{lambda}}!",
@@ -41,7 +42,8 @@
           "lisp": "(lambda () \"{{planet}}\")",
           "pwsh": "\"{{planet}}\"",
           "go": "func() string { return \"{{planet}}\" }",
-          "erlang": "fun() -> \"{{planet}}\" end."
+          "erlang": "fun() -> \"{{planet}}\" end.",
+          "matlab": "@() \"{{planet}}\""
         }
       },
       "template": "Hello, {{lambda}}!",
@@ -64,7 +66,8 @@
           "lisp": "(lambda () \"|planet| => {{planet}}\")",
           "pwsh": "\"|planet| => {{planet}}\"",
           "go": "func() string { return \"|planet| => {{planet}}\" }",
-          "erlang": "fun() -> \"|planet| => {{planet}}\" end."
+          "erlang": "fun() -> \"|planet| => {{planet}}\" end.",
+          "matlab": "@() \"|planet| => {{planet}}\""
         }
       },
       "template": "{{= | | =}}\nHello, (|&lambda|)!",
@@ -86,7 +89,8 @@
           "lisp": "(let ((g 0)) (lambda () (incf g)))",
           "pwsh": "if (($null -eq $script:calls) -or ($script:calls -ge 3)){$script:calls=0}; ++$script:calls; $script:calls",
           "go": "func() func() int { g := 0; return func() int { g++; return g } }()",
-          "erlang": "fun() -> G=case get(g) of undefined -> 1; _G -> _G end, put(g, G+1), G end."
+          "erlang": "fun() -> G=case get(g) of undefined -> 1; _G -> _G end, put(g, G+1), G end.",
+          "matlab": "@() feval(@(~) getappdata(0, \"calls\"), evalc(\"setappdata(0, \"\"calls\"\", mod(sum(getappdata(0, \"\"calls\"\")), 3) + 1)\"))"
         }
       },
       "template": "{{lambda}} == {{{lambda}}} == {{lambda}}",
@@ -108,7 +112,8 @@
           "lisp": "(lambda () \">\")",
           "pwsh": "\">\"",
           "go": "func() string { return \">\" }",
-          "erlang": "fun() -> \">\" end."
+          "erlang": "fun() -> \">\" end.",
+          "matlab": "@() \">\""
         }
       },
       "template": "<{{lambda}}{{{lambda}}}",
@@ -131,7 +136,8 @@
           "lisp": "(lambda (text) (if (string= text \"{{x}}\") \"yes\" \"no\"))",
           "pwsh": "if ($args[0] -eq \"{{x}}\") {\"yes\"} else {\"no\"}",
           "go": "func(text string) string { if text == \"{{x}}\" { return \"yes\" } else { return \"no\" } }",
-          "erlang": "fun(\"{{x}}\") -> \"yes\"; (_) -> \"no\" end."
+          "erlang": "fun(\"{{x}}\") -> \"yes\"; (_) -> \"no\" end.",
+          "matlab": "@(text) replace(string(text == \"{{x}}\"), [\"false\", \"true\"], [\"no\", \"yes\"])"
         }
       },
       "template": "<{{#lambda}}{{x}}{{/lambda}}>",
@@ -154,7 +160,8 @@
           "lisp": "(lambda (text) (format nil \"~a{{planet}}~a\" text text))",
           "pwsh": "\"$($args[0]){{planet}}$($args[0])\"",
           "go": "func(text string) string { return text + \"{{planet}}\" + text }",
-          "erlang": "fun(Text) -> Text ++ \"{{planet}}\" ++ Text end."
+          "erlang": "fun(Text) -> Text ++ \"{{planet}}\" ++ Text end.",
+          "matlab": "@(text) text + \"{{planet}}\" + text"
         }
       },
       "template": "<{{#lambda}}-{{/lambda}}>",
@@ -177,7 +184,8 @@
           "lisp": "(lambda (text) (format nil \"~a{{planet}} => |planet|~a\" text text))",
           "pwsh": "\"$($args[0]){{planet}} => |planet|$($args[0])\"",
           "go": "func(text string) string { return text + \"{{planet}} => |planet|\" + text }",
-          "erlang": "fun(Text) -> Text ++ \"{{planet}} => |planet|\" ++ Text end."
+          "erlang": "fun(Text) -> Text ++ \"{{planet}} => |planet|\" ++ Text end.",
+          "matlab": "@(text) text + \"{{planet}} => |planet|\" + text"
         }
       },
       "template": "{{= | | =}}<|#lambda|-|/lambda|>",
@@ -199,7 +207,8 @@
           "lisp": "(lambda (text) (format nil \"__~a__\" text))",
           "pwsh": "\"__$($args[0])__\"",
           "go": "func(text string) string { return \"__\" + text + \"__\" }",
-          "erlang": "fun(Text) -> \"__\" ++ Text ++ \"__\" end."
+          "erlang": "fun(Text) -> \"__\" ++ Text ++ \"__\" end.",
+          "matlab": "@(text) \"__\" + text + \"__\""
         }
       },
       "template": "{{#lambda}}FILE{{/lambda}} != {{#lambda}}LINE{{/lambda}}",
@@ -222,7 +231,8 @@
           "lisp": "(lambda (text) (declare (ignore text)) nil)",
           "pwsh": "$false",
           "go": "func(text string) bool { return false }",
-          "erlang": "fun(_) -> false end."
+          "erlang": "fun(_) -> false end.",
+          "matlab": "@(~) false"
         }
       },
       "template": "<{{^lambda}}{{static}}{{/lambda}}>",
